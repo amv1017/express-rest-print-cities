@@ -1,23 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>React! React! React!</title>
-  <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
-  <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
-  <style>
-    #root img {      
-      margin: 0 auto;
-      display: block;
-      filter: brightness(90%) contrast(150%);
-      width: 600px;
-    }
-  </style>
-</head>
-<body>
-  <div id="root"></div>
-  <script type="module" src="front.js"></script>
-</body>
-</html>
+<form id="citySearchForm" action="http://localhost:3000/getcity" method="POST">
+
+        <div>
+            <p>Choose a city:</p>
+            <input type="text" placeholder="Enter a city" id="getCitiesInput" name="city"></input>
+            <input type="submit" value="submit">
+        </div>
+
+        <div id="weather"></div>
+
+        <p><span id="temp"></span></p>
+
+        <p><span id="wind"></span></p>
+
+ </form>

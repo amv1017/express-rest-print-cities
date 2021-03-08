@@ -1,17 +1,42 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+const urlencodedParser = bodyParser.urlencoded({ extended: false});
+const path = require('path');
+const chalk = require('chalk');
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const _dirname = path.resolve();
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+let cities = ['Ярославль']
+
+app.use(express.static('public'));
+app.get('/', function(req, res){
+    res.sendFile(_dirname + "/" + "index.html");
+})
+
+app.post('/getcity', urlencodedParser, function(req, res){
+    response = { city : req.body.city };
+    console.log(response)
+    cities.push(response.city)
+    res.writeHead(200,{
+        'Content-Type':'text/html; charset=utf-8'
+    });
+    res.end(JSON.stringify(response));
+    console.log(cities)
+})
+
+app.get('/list',(req,res) => {
+    res.writeHead(200,{
+        'Content-Type':'text/html; charset=utf-8'
+    });
+
+   result = '<ul><li>'+cities.join('</li><li>')+'</ul>';
+   return res.end(result)
+})
+
+const PORT = process.env.PORT || 3000;
+const uri = 'http://localhost:'+PORT+'/index.html';
+
+app.listen(PORT, () => { 
+    console.log(`${chalk.bold(uri)}`);
+});
