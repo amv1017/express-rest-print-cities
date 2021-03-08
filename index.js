@@ -7,7 +7,7 @@ const chalk = require('chalk');
 
 const _dirname = path.resolve();
 
-let cities = ['Ярославль']
+let cities = ['Тула']
 
 app.use(express.static('public'));
 app.get('/', function(req, res){
@@ -29,9 +29,7 @@ app.get('/list',(req,res) => {
     res.writeHead(200,{
         'Content-Type':'text/html; charset=utf-8'
     });
-
-   result = '<ul><li>'+cities.join('</li><li>')+'</ul>';
-   return res.end(result)
+   res.end('<ul><li>'+cities.join('</li><li>')+'</ul>')
 })
 
 const PORT = process.env.PORT || 3000;
